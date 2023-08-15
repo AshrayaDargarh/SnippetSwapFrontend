@@ -34,7 +34,7 @@ const ViewPublic = () => {
     useEffect(()=>{
         getView()
     },[])
-    const currentUrl = 'https://snippetswap-api.onrender.com'
+    const currentUrl = 'https://snippetswap.onrender.com'
     function handleCopy() {
       navigator.clipboard.writeText(`${currentUrl}/public-access/${id}`);
       setCopy(true);

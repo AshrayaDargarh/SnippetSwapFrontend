@@ -18,7 +18,7 @@ const ViewUpdate = () => {
   const [copy, setCopy] = useState(false);
   const [time, setTime] = useState();
   const navigate = useNavigate();
-  const currentUrl = 'https://snippetswap-api.onrender.com'
+  const currentUrl = 'https://snippetswap.onrender.com'
   async function getSnippet() {
     try {
       const token = localStorage.getItem("token");
