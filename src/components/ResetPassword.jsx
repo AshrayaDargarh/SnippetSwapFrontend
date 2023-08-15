@@ -17,7 +17,7 @@ const ResetPassword = () => {
   {
     e.preventDefault()
     try {
-      const res=await axios.post(`https://snippet-swap-backend.vercel.app/auth/reset-password/${resetToken}`,password)
+      const res=await axios.post(`https://snippetswap-api.onrender.com/auth/reset-password/${resetToken}`,password)
       setIsValid(true)
       navigate('/login')
     } catch (error) {
