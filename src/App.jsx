@@ -64,7 +64,7 @@ export const appRouter=createBrowserRouter([{
       element:<ViewList/>
     },
     {
-      path:"/viewupdate/:viewId",
+      path:"/viewupdate/:id",
       element:<ViewUpdate/>
     },
     {
@@ -74,7 +74,7 @@ export const appRouter=createBrowserRouter([{
   ]
 },
 {
-    path:"/public-access/:viewId",
+    path:"/public-access/:id",
     element:<ViewPublic/>,
     errorElement:<Error/>
 },

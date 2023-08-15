@@ -14,11 +14,11 @@ const ViewPublic = () => {
     const [snippet,setSnippet]=useState(initialValue)
     const [time,setTime]=useState()
   const [copy, setCopy] = useState(false);
-    const {viewId}=useParams()
+    const {id}=useParams()
     async function getView()
     {
         try {
-            const res=await axios.get(`https://snippetswap-api.onrender.com/public-access/${viewId}`)
+            const res=await axios.get(`https://snippetswap-api.onrender.com/public-access/${id}`)
             setSnippet(res.data)
             const inputDate = new Date(res.data.intendedExpireAt);
             const currentDate = new Date();
@@ -34,9 +34,9 @@ const ViewPublic = () => {
     useEffect(()=>{
         getView()
     },[])
-    const currentUrl = window.location.host;
+    const currentUrl = 'https://snippetswap-api.onrender.com'
     function handleCopy() {
-      navigator.clipboard.writeText(`http://${currentUrl}/public-access/${viewId}`);
+      navigator.clipboard.writeText(`${currentUrl}/public-access/${id}`);
       setCopy(true);
       setTimeout(() => {
         setCopy(false);
@@ -76,7 +76,7 @@ const ViewPublic = () => {
         <div className="flex mt-5">
                   <input
                     type="text"
-                    value={`http://${currentUrl}/public-access/${viewId}`}
+                    value={`${currentUrl}/public-access/${id}`}
                     readOnly
                     name="share"
                     id="share"
@@ -90,7 +90,7 @@ const ViewPublic = () => {
                       type="button"
                       onClick={() =>
                         navigator.clipboard.writeText(
-                          `http://${currentUrl}/public-access/${viewId}`
+                          `${currentUrl}/public-access/${id}`
                         )
                       }
                     >
@@ -103,7 +103,7 @@ const ViewPublic = () => {
                   )}
                 </div>
                 <div className="flex w-64 h-52  mt-7 ml-4">
-                <QRCode value={`http://${currentUrl}/public-access/${viewId}`} size={200}  />
+                <QRCode value={`${currentUrl}/public-access/${id}`} size={200}  />
                 </div>
         </div>
        

@@ -13,16 +13,16 @@ const initialValue = {
 };
 
 const ViewUpdate = () => {
-  const { viewId } = useParams();
+  const { id } = useParams();
   const [snippet, setSnippet] = useState(initialValue);
   const [copy, setCopy] = useState(false);
   const [time, setTime] = useState();
   const navigate = useNavigate();
-  const currentUrl = window.location.host;
+  const currentUrl = 'https://snippetswap-api.onrender.com'
   async function getSnippet() {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`https://snippetswap-api.onrender.com/view/${viewId}`, {
+      const res = await axios.get(`https://snippetswap-api.onrender.com/view/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSnippet(res.data);
@@ -54,7 +54,7 @@ const ViewUpdate = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.patch(
-        `https://snippetswap-api.onrender.com/view/${viewId}`,
+        `https://snippetswap-api.onrender.com/view/${id}`,
         snippet,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -71,7 +71,7 @@ const ViewUpdate = () => {
     try {
       if (window.confirm("Do you really want to delete this?")) {
         const token = localStorage.getItem("token");
-        const res = await axios.delete(`https://snippetswap-api.onrender.com/view/${viewId}`, {
+        const res = await axios.delete(`https://snippetswap-api.onrender.com/view/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(res);
@@ -83,7 +83,7 @@ const ViewUpdate = () => {
     }
   }
   function handleCopy() {
-    navigator.clipboard.writeText(`http://${currentUrl}/public-access/${viewId}`);
+    navigator.clipboard.writeText(`${currentUrl}/public-access/${id}`);
     setCopy(true);
     setTimeout(() => {
       setCopy(false);
@@ -153,7 +153,7 @@ const ViewUpdate = () => {
                 <div className="flex ">
                   <input
                     type="text"
-                    value={`http://${currentUrl}/public-access/${viewId}`}
+                    value={`${currentUrl}/public-access/${id}`}
                     readOnly
                     name="share"
                     id="share"
@@ -167,7 +167,7 @@ const ViewUpdate = () => {
                       type="button"
                       onClick={() =>
                         navigator.clipboard.writeText(
-                          `http://${currentUrl}/public-access/${viewId}`
+                          `${currentUrl}/public-access/${id}`
                         )
                       }
                     >
@@ -181,7 +181,7 @@ const ViewUpdate = () => {
                 </div>
               </div>
               <div className="flex w-64 h-52  mt-7 ml-4">
-                <QRCode value={`http://${currentUrl}/public-access/${viewId}`} size={200}  />
+                <QRCode value={`${currentUrl}/public-access/${id}`} size={200}  />
                 </div>
               <div className="flex sm:flex-row flex-col">
               <button className=" bg-slate-800 shadow-md shadow-slate-700 p-2 w-40 rounded-md mt-3 sm:mx-2">
