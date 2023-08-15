@@ -70,14 +70,13 @@ export const appRouter=createBrowserRouter([{
     {
       path:"/profile",
       element:<Profile/>
+    },
+    {
+        path:"/public-access/:id",
+        element:<ViewPublic/>,
     }
   ]
-},
-{
-    path:"/public-access/:id",
-    element:<ViewPublic/>,
-    errorElement:<Error/>
-},
+}
 ,
     {
       path:'/unauthorized',
