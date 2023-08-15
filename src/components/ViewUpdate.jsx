@@ -83,7 +83,7 @@ const ViewUpdate = () => {
     }
   }
   function handleCopy() {
-    navigator.clipboard.writeText(`http://${currentUrl}/public/${viewId}`);
+    navigator.clipboard.writeText(`http://${currentUrl}/public-access/${viewId}`);
     setCopy(true);
     setTimeout(() => {
       setCopy(false);
@@ -153,7 +153,7 @@ const ViewUpdate = () => {
                 <div className="flex ">
                   <input
                     type="text"
-                    value={`http://${currentUrl}/public/${viewId}`}
+                    value={`http://${currentUrl}/public-access/${viewId}`}
                     readOnly
                     name="share"
                     id="share"
@@ -167,7 +167,7 @@ const ViewUpdate = () => {
                       type="button"
                       onClick={() =>
                         navigator.clipboard.writeText(
-                          `http://${currentUrl}/public/${viewId}`
+                          `http://${currentUrl}/public-access/${viewId}`
                         )
                       }
                     >
@@ -181,7 +181,7 @@ const ViewUpdate = () => {
                 </div>
               </div>
               <div className="flex w-64 h-52  mt-7 ml-4">
-                <QRCode value={`http://${currentUrl}/public/${viewId}`} size={200}  />
+                <QRCode value={`http://${currentUrl}/public-access/${viewId}`} size={200}  />
                 </div>
               <div className="flex sm:flex-row flex-col">
               <button className=" bg-slate-800 shadow-md shadow-slate-700 p-2 w-40 rounded-md mt-3 sm:mx-2">
