@@ -74,7 +74,7 @@ export const appRouter=createBrowserRouter([{
   ]
 },
 {
-    path:"/public/:viewId",
+    path:"/public-access/:viewId",
     element:<ViewPublic/>,
     errorElement:<Error/>
 },
