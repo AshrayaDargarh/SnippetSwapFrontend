@@ -25,9 +25,10 @@ const Register = () => {
         pending: "Please wait your profile is being created...",
         success: "Account created successfully.", 
         error: "Email already exist or invalid credentials!", 
-      });
-      if(res)
+      }).then(()=>{
         navigate('/login')
+      })
+     
     }catch(error)
     {
       if(error.response)

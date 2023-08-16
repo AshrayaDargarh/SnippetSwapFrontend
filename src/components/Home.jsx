@@ -20,7 +20,7 @@ const Home = () => {
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
           <li className="flex flex-col items-center">
             <img
-              src="/src/assets/icons/create1.png"
+              src="create1.png"
               alt="Create"
               className="w-20 cursor-pointer  object-cover "
             />
@@ -34,7 +34,7 @@ const Home = () => {
           </li>
           <li className="flex flex-col items-center">
             <img
-              src="/src/assets/icons/share1.png"
+              src="share1.png"
               alt="Share"
               className="w-20 cursor-pointer object-cover"
             />
@@ -47,7 +47,7 @@ const Home = () => {
           </li>
           <li className="flex flex-col items-center">
             <img
-              src="/src/assets/icons/qr-scan.png"
+              src="qr-scan.png"
               alt="Access"
               className="w-20 cursor-pointer object-cover"
             />

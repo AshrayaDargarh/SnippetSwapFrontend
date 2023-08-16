@@ -26,11 +26,13 @@ const Login = () => {
         pending: "Please wait for a while...",
         success: "Login successfully.", 
         error: "Please enter correct email or password!", 
-      });
-      setIsValid(true)
-      console.log(res.data.token)
-      login(res.data.token)
-      navigate('/create')      
+      }).then(()=>{
+        setIsValid(true)
+        console.log(res.data.token)
+        login(res.data.token)
+        navigate('/create')  
+      })
+          
     }
     catch(err)
     {
