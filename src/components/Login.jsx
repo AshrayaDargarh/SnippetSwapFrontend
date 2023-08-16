@@ -20,19 +20,13 @@ const Login = () => {
     e.preventDefault()
     try
     {
-      const res= axios.post('https://snippetswap-api.onrender.com/auth/login',user)
+      const res=await axios.post('https://snippetswap-api.onrender.com/auth/login',user)
       // localStorage.setItem('token',res.data.token)
-      toast.promise(res, {
-        pending: "Please wait for a while...",
-        success: "Login successfully.", 
-        error: "Please enter correct email or password!", 
-      }).then(()=>{
-        setIsValid(true)
-        console.log(res.data.token)
-        login(res.data.token)
-        navigate('/create')  
-      })
-          
+      console.log('Sign is submitted',res)
+      setIsValid(true)
+      console.log(res.data.token)
+      login(res.data.token)
+      navigate('/create')      
     }
     catch(err)
     {
