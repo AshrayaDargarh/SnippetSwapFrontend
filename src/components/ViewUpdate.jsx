@@ -6,6 +6,7 @@ import PasteIcon from "../assets/icons/PasteIcon";
 import QRCode from "qrcode.react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Triangle } from "react-loader-spinner";
 const initialValue = {
   title: "",
   data: "",
@@ -18,6 +19,7 @@ const ViewUpdate = () => {
   const [copy, setCopy] = useState(false);
   const [time, setTime] = useState();
   const navigate = useNavigate();
+  console.log('Snippet Len',snippet.data)
   const currentUrl = 'https://snippetswap.onrender.com'
   async function getSnippet() {
     try {
@@ -89,7 +91,15 @@ const ViewUpdate = () => {
       setCopy(false);
     }, 1000);
   }
-  return (
+  return snippet.data===""?<div className="h-screen flex justify-center"><Triangle
+  height="80"
+  width="80"
+  color="#4fa94d"
+  ariaLabel="triangle-loading"
+  wrapperStyle={{}}
+  wrapperClassName=""
+  visible={true}
+/></div>: (
     <div className="bg-inherit pb-10  overflow-hidden">
         <form onSubmit={handleUpdate}>
           <div className="flex justify-center  flex-wrap">

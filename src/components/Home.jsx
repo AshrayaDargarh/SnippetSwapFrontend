@@ -100,7 +100,7 @@ function About() {
       </div>{" "}
       
         <p className="text-gray-300 text-center mt-10">
-        Developed by <a href="https://www.ashrayadargarh.me" className="text-gray-400" target="_blank"> Ashraya Dargarh</a>, Created with MERN Stack.
+        Developed by <a href="https://www.ashrayadargarh.me" className="text-blue-300 hover:underline" target="_blank"> Ashraya Dargarh</a>, Created with MERN Stack.
         </p>
     </div>
   );

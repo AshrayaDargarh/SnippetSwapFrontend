@@ -4,6 +4,7 @@ import CopyIcon from '../assets/icons/CopyIcon'
 import PasteIcon from '../assets/icons/PasteIcon'
 import { useParams } from 'react-router-dom'
 import QRCode from "qrcode.react";
+import { Triangle } from 'react-loader-spinner'
 const initialValue={
     title:'',
     data:'',
@@ -13,7 +14,6 @@ const initialValue={
 const ViewPublic = () => {
     const [snippet,setSnippet]=useState(initialValue)
     const [time,setTime]=useState()
-  const [copy, setCopy] = useState(false);
     const {id}=useParams()
     async function getView()
     {
@@ -42,7 +42,15 @@ const ViewPublic = () => {
         setCopy(false);
       }, 1000);
     }
-  return (
+  return snippet.data===''?<div className="h-screen flex justify-center"><Triangle
+  height="80"
+  width="80"
+  color="#4fa94d"
+  ariaLabel="triangle-loading"
+  wrapperStyle={{}}
+  wrapperClassName=""
+  visible={true}
+/></div>:  (
     <div className='bg-slate-900 text-white overflow-hidden font-display  '>
     <div>
       <form >

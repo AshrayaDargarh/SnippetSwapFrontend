@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const[user,setUser]=useState({})
   const[isValid,setIsValid]=useState(true)
@@ -20,18 +22,19 @@ const Login = () => {
     e.preventDefault()
     try
     {
-      const res=await axios.post('https://snippetswap-api.onrender.com/auth/login',user)
-      // localStorage.setItem('token',res.data.token)
-      console.log('Sign is submitted',res)
-      setIsValid(true)
-      console.log(res.data.token)
-      login(res.data.token)
-      navigate('/create')      
+      const res= axios.post('https://snippetswap-api.onrender.com/auth/login',user)
+      toast.promise(res, {
+        pending: "Please wait for a while...",
+        success: "Login successfully.", 
+        error: "Invalid credentials!", 
+      }).then((res)=>{
+        setIsValid(true)
+        login(res.data.token)
+      navigate('/create')    
+      })       
     }
     catch(err)
     {
-      console.log(err.response)
-     
       if(err.response)
       {
         const {status,data}=err.response
@@ -76,6 +79,18 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       </div>
   );
 }

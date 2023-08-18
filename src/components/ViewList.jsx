@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import View from './View'
 import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { Triangle } from 'react-loader-spinner'
 const ViewList = () => {
     const [snippets,setSnippets]=useState([])
     const navigate=useNavigate()
@@ -24,7 +25,15 @@ const ViewList = () => {
   return (
     <div className='h-screen'>
     <div className='flex justify-center lg:gap-0 gap-8  m-20 flex-wrap' >
-        {snippets.length===0?<div>No snippet available</div>:snippets.map((snippet)=>{return <Link to={'/viewupdate/'+snippet._id} key={snippet._id}><View key={snippet._id} {...snippet}/> </Link> })}
+        {snippets.length===0? <Triangle
+  height="80"
+  width="80"
+  color="#4fa94d"
+  ariaLabel="triangle-loading"
+  wrapperStyle={{}}
+  wrapperClassName=""
+  visible={true}
+/>:snippets.map((snippet)=>{return <Link to={'/viewupdate/'+snippet._id} key={snippet._id}><View key={snippet._id} {...snippet}/> </Link> })}
     </div>
     </div>
   )

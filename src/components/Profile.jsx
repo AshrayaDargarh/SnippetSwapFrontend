@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Triangle } from "react-loader-spinner";
 const initialState={
   userName:'',
   firstName:'',
@@ -62,7 +63,15 @@ const Profile = () => {
       [e.target.name]:e.target.value
     })
   }
-  return (
+  return user.firstName===''?<div className="h-screen flex justify-center"><Triangle
+  height="80"
+  width="80"
+  color="#4fa94d"
+  ariaLabel="triangle-loading"
+  wrapperStyle={{}}
+  wrapperClassName=""
+  visible={true}
+/></div>:  (
     <div className="mb-32">
       <form
         className="flex flex-col justify-center items-center mt-20"
