@@ -14,6 +14,7 @@ const initialValue={
 const ViewPublic = () => {
     const [snippet,setSnippet]=useState(initialValue)
     const [time,setTime]=useState()
+  const [copy, setCopy] = useState(false);
     const {id}=useParams()
     async function getView()
     {
@@ -50,7 +51,7 @@ const ViewPublic = () => {
   wrapperStyle={{}}
   wrapperClassName=""
   visible={true}
-/></div>:  (
+/></div>: (
     <div className='bg-slate-900 text-white overflow-hidden font-display  '>
     <div>
       <form >
