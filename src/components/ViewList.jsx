@@ -27,15 +27,7 @@ const ViewList = () => {
   return (
     <div className='flex flex-col min-h-screen'>
     <div className='flex flex-wrap  justify-center   gap-8  m-20 ' >
-        {snippets.length===0? <Triangle
-  height="80"
-  width="80"
-  color="#4fa94d"
-  ariaLabel="triangle-loading"
-  wrapperStyle={{}}
-  wrapperClassName=""
-  visible={true}
-/>:snippets.map((snippet)=>{return <Link to={'/viewupdate/'+snippet._id} key={snippet._id}><View key={snippet._id}  {...snippet}/> </Link> })}
+        {snippets.length===0? <div>No snippet found!</div>:snippets.map((snippet)=>{return <Link to={'/viewupdate/'+snippet._id} key={snippet._id}><View key={snippet._id}  {...snippet}/> </Link> })}
     </div>
     </div>
   )
