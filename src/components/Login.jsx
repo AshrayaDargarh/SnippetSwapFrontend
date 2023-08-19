@@ -71,7 +71,7 @@ const Login = () => {
               <Link to='/forgotpassword' className='text-blue-500'>Forgot password</Link>
             </div>
             <div className="mt-3 flex flex-col items-center justify-center">
-              <button className="bg-sky-700 px-20 py-1 rounded-lg" type='submit'>Sign n</button>
+              <button className="bg-sky-700 px-20 py-1 rounded-lg" type='submit'>Sign in</button>
             </div>
             <p className='mt-4 text-sm'>
                 Don't have an account yet? <Link to='/signup' className='text-blue-500'>Sign up</Link>

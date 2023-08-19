@@ -26,7 +26,7 @@ const Register = () => {
         success: "Account created successfully.", 
         error: "Email already exist or invalid credentials!", 
       }).then(()=>{
-        navigate('/login')
+        navigate('/create')    
       })
      
     }catch(error)
