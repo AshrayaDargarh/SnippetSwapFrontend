@@ -1,60 +1,224 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import CopyIcon from '../assets/icons/CopyIcon'
-import PasteIcon from '../assets/icons/PasteIcon'
-import { useParams } from 'react-router-dom'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import CopyIcon from "../assets/icons/CopyIcon";
+import PasteIcon from "../assets/icons/PasteIcon";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import QRCode from "qrcode.react";
-import { Triangle } from 'react-loader-spinner'
-const initialValue={
-    title:'',
-    data:'',
-    daysToExpire:0,
-    userName:''
-}
+import { TailSpin } from "react-loader-spinner";
+import { BACKEND_API } from "../config";
+const initialValue = {
+  title: "",
+  data: "",
+  daysToExpire: 0,
+  userName: "",
+};
 const ViewPublic = () => {
-    const [snippet,setSnippet]=useState(initialValue)
-    const [time,setTime]=useState()
+  const [snippet, setSnippet] = useState(initialValue);
+  const [time, setTime] = useState();
   const [copy, setCopy] = useState(false);
-    const {id}=useParams()
-    async function getView()
-    {
-        try {
-            const res=await axios.get(`https://snippetswap-api.onrender.com/public-access/${id}`)
-            setSnippet(res.data)
-            const inputDate = new Date(res.data.intendedExpireAt);
-            const currentDate = new Date();
-            const timeDifferenceMillis = inputDate - currentDate;
-            const daysDifference = Math.floor(timeDifferenceMillis / (60 * 60 * 1000));
-            setTime(daysDifference)
-        } 
-        catch (error) {
-      navigate('/unauthorized')
-            console.log(error.response)
-        }
+  const [copyCode,setCopyCode]=useState(false)
+  const navigate=useNavigate()
+  const { id } = useParams();
+  function daysDifference(res) {
+    if (res) {
+      const expiryDate = new Date(res.updatedAt);
+      const daysToExpire = res.daysToExpire;
+      expiryDate.setDate(expiryDate.getDate() + parseInt(daysToExpire));
+      const inputDate = new Date(expiryDate);
+      const currentDate = new Date();
+      const timeDifferenceMillis = inputDate - currentDate;
+      setTime(Math.floor(timeDifferenceMillis / (60 * 60 * 1000)));
     }
-    useEffect(()=>{
-        getView()
-    },[])
-    const currentUrl = 'https://snippetswap.onrender.com'
-    function handleCopy() {
-      navigator.clipboard.writeText(`${currentUrl}/public-access/${id}`);
-      setCopy(true);
-      setTimeout(() => {
-        setCopy(false);
-      }, 1000);
+  }
+  async function getView() {
+    try {
+      const res = await axios.get(`${BACKEND_API}/public-access/${id}`);
+      if (res.data) {
+        setSnippet(res.data);
+        daysDifference(res.data);
+      }
+    } catch (error) {
+      navigate('/error')
+      console.log(error.response);
     }
-  return snippet.data===''?<div className="h-screen flex justify-center"><Triangle
+  }
+  useEffect(() => {
+    getView();
+  }, []);
+  const currentUrl = "https://snippetswap.onrender.com";
+  function handleCopy() {
+    navigator.clipboard.writeText(`${currentUrl}/public-access/${id}`);
+    setCopy(true);
+    setTimeout(() => {
+      setCopy(false);
+    }, 1000);
+  }
+  function handleCopyCode() {
+    navigator.clipboard.writeText(`${snippet.data}`);
+    setCopyCode(true);
+    setTimeout(() => {
+      setCopyCode(false);
+    }, 1000);
+  }
+  return snippet.data === "" ? (
+    <div className="h-screen flex justify-center">
+      <TailSpin
   height="80"
   width="80"
-  color="#4fa94d"
-  ariaLabel="triangle-loading"
+  color="#64B5F6"
+  ariaLabel="tail-spin-loading"
+  radius="1"
   wrapperStyle={{}}
-  wrapperClassName=""
+  wrapperClass=""
   visible={true}
-/></div>: (
-    <div className='bg-slate-900 text-white overflow-hidden font-display  '>
-    <div>
-      <form >
+/>
+    </div>
+  ) : (
+    <div className=" text-white overflow-hidden font-display  ">
+      {time < 0 ? (
+        <div className="flex justify-center mt-10 ">
+          <div className="bg-[#2E2E2E] p-8 rounded-lg shadow-lg max-w-md">
+            <h3 className="text-4xl font-bold text-red-600 text-center">
+              OOPS!
+            </h3>
+            <p className="mt-4  text-gray-300 text-center">
+              The snippet you are looking for is expired. If you want to access
+              the snippet ask the owner to extend the Snippet duration.
+            </p>
+            <Link to={"/"}>
+              {" "}
+              <button
+                type="button"
+                className="mt-4 px-6 py-3 bg-blue-500 text-[#FFFFFF] rounded-lg hover:bg-blue-600 w-full"
+              >
+                Home
+              </button>
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <form>
+            <div className="flex flex-col lg:flex-row items-center justify-center lg:gap-32  py-8 ">
+              <div className="md:w-1/2">
+                <h3 className="text-3xl font-bold text-FFFFFF ">
+                  Here is the Code
+                </h3>
+                <textarea
+                  name="data"
+                  id="data"
+                  value={snippet.data}
+                  className="bg-[#1d1b1b]  border-[#64B5F6] border-[2px] focus:border-none  focus:ring-[#64B5F6] focus:ring-offset-[#64B5F6] focus:ring-offset-2  mt-4 px-4 py-2 rounded-lg w-full h-[40rem] custom-shadow"
+                  placeholder="Enter your code here..."
+                  readOnly
+                ></textarea>
+                 <div className="flex flex-col space-y-2 mt-4">
+                  {copyCode ? (
+                    <>
+                      <button
+                        disabled
+                        type="button"
+                        className="px-6 py-3 bg-blue-500 text-FFFFFF rounded-lg hover:bg-blue-600 w-full"
+                      >
+                        Copied
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={handleCopyCode}
+                      type="button"
+                      className=" px-6 py-3 bg-blue-500 text-FFFFFF rounded-lg hover:bg-blue-600 w-full"
+                    >
+                      Copy Code
+                    </button>
+                  )}
+                </div>
+              </div>
+              <div className="md:w-96 mt-8 lg:mt-0">
+                <div className="flex flex-col space-y-2">
+                  <label htmlFor="title" className="text-lg text-FFFFFF">
+                    Snippet title:
+                  </label>
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value={snippet.title}
+                    className="px-2 py-2 border bg-[#1d1b1b]   border-[#64B5F6]  focus:border-none  focus:ring-[#64B5F6] focus:ring-offset-[#64B5F6] focus:ring-offset-1  rounded-lg"
+                    placeholder="Enter a title for your snippet..."
+                    readOnly
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 mt-2">
+                  <label htmlFor="daysToExpire" className="text-lg ">
+                    Expire after: {time} Hours
+                  </label>
+                </div>
+
+                <div className="flex flex-col space-y-2 mt-2">
+                  <label htmlFor="userName" className="text-lg text-FFFFFF">
+                    Created By:
+                  </label>
+                  <input
+                    type="text"
+                    id="userName"
+                    name="title"
+                    value={snippet.userName}
+                    className="px-2 py-2 border bg-[#1d1b1b]   border-[#64B5F6]  focus:border-none  focus:ring-[#64B5F6] focus:ring-offset-[#64B5F6] focus:ring-offset-1  rounded-lg"
+                    placeholder="Enter a title for your snippet..."
+                    readOnly
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 mt-2">
+                  <label htmlFor="share" className="text-lg text-FFFFFF">
+                    Share the link:
+                  </label>
+                  <input
+                    type="text"
+                    id="share"
+                    name="share"
+                    value={`${currentUrl}/public-access/${id}`}
+                    className="px-2 py-2  border bg-[#1d1b1b]   border-[#64B5F6]  focus:border-none  focus:ring-[#64B5F6] focus:ring-offset-[#64B5F6] focus:ring-offset-1  rounded-lg"
+                    placeholder="Enter a title for your snippet..."
+                    readOnly
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 mt-4">
+                  {copy ? (
+                    <>
+                      <button
+                        disabled
+                        type="button"
+                        className="px-6 py-3 bg-blue-500 text-FFFFFF rounded-lg hover:bg-blue-600 w-full"
+                      >
+                        Copied
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={handleCopy}
+                      type="button"
+                      className=" px-6 py-3 bg-blue-500 text-FFFFFF rounded-lg hover:bg-blue-600 w-full"
+                    >
+                      Copy URL
+                    </button>
+                  )}
+                </div>
+                <div className="flex flex-col space-y-2 mt-4 items-center">
+                  <QRCode
+                    value={`${currentUrl}/public-access/${id}`}
+                    className="custom-shadow"
+                    size={200}
+                  />
+                  <p className="text-lg ">Scan the QR Code</p>
+                </div>
+              </div>
+            </div>
+          </form>
+          {/* <form >
       <div className='flex justify-center flex-wrap pt-8'>
         <div className='m-5 '>
           <label htmlFor='data' className='block pb-3' ><span className='text-2xl font-semibold'>Your code is here:</span></label>
@@ -117,10 +281,11 @@ const ViewPublic = () => {
         </div>
        
       </div>
-        </form>
+        </form> */}
+        </div>
+      )}
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default ViewPublic
+export default ViewPublic;

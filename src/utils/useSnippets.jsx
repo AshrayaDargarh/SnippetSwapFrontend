@@ -1,6 +1,7 @@
 import React from 'react'
 import { useMemo,useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { BACKEND_API } from '../config'
 import axios from 'axios'
 const useSnippets = () => {
     const [snippets,setSnippets]=useState([])
@@ -12,7 +13,7 @@ const useSnippets = () => {
     {
         try {
         const token=localStorage.getItem('token')
-        const res=await axios.get('https://snippetswap-api.onrender.com/view',{headers:{'Authorization':`Bearer ${token}`}})
+        const res=await axios.get(`${BACKEND_API}/view`,{headers:{'Authorization':`Bearer ${token}`}})
             setSnippets(res.data)
             // console.log('user=',res.data[0].user)
         } 

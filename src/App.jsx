@@ -14,19 +14,19 @@ import ViewList from './components/ViewList'
 import ViewUpdate from './components/ViewUpdate'
 import ViewPublic from './components/ViewPublic'
 import Unauthorized from './components/Unauthorized'
+import DefaultVerify from './components/DefaultVerify'
+import VerifyEmail from './components/VerifyEmail'
 function App() {
   const [count, setCount] = useState(true)
   // const token=useLongIn()
   return (
     <>
-    
-    <div className="bg-slate-900 text-white overflow-hidden font-display">
+    <div className=" text-white  font-display">
     <AuthProvider>
     <Header/>
      <Outlet/>
      </AuthProvider>
     </div>
-    
     </>
   )
 }
@@ -54,6 +54,14 @@ export const appRouter=createBrowserRouter([{
     {
     path:'/auth/reset-password/:resetToken',
     element:<ResetPassword/>
+    }, 
+    {
+      path:'/auth/verify/:token',
+      element:<DefaultVerify/>
+    },
+    {
+      path:'/verifyemail',
+      element:<VerifyEmail/>
     },
     {
       path:"/create",
@@ -70,6 +78,10 @@ export const appRouter=createBrowserRouter([{
     {
       path:"/profile",
       element:<Profile/>
+    },
+    {
+      path:"/error",
+      element:<Error/>
     },
     {
         path:"/public-access/:id",

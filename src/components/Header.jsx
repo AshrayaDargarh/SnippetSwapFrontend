@@ -18,16 +18,16 @@ const Header = () => {
           </li>
          
           <li className="px-6">
-            <Link to='/create'> <button className=" px-3 py-2 rounded-md  bg-slate-800 hover:bg-slate-900 hover:duration-300 transition-all flex justify-center gap-2 items-center "><CreateIcon /> Create</button></Link>
+            <Link to='/create'> <button className=" px-3 py-2 rounded-md ` bg-[#2E2E2E] hover:bg-[#1E1E1E]  hover:duration-300 transition-all flex justify-center gap-2 items-center "><CreateIcon /> Create</button></Link>
           </li>
           <li className="px-6">
             <Link to='/view'>
-            <button className=" px-3 py-2 rounded-md  bg-slate-800 hover:bg-slate-900 hover:duration-300 transition-all flex justify-center gap-2 items-center ">
+            <button className=" px-3 py-2 rounded-md  bg-[#2E2E2E]  hover:bg-[#1E1E1E] hover:duration-300 transition-all flex justify-center gap-2 items-center ">
              <ViewIcon/> View</button></Link>
           </li>
           <li className="px-6 ">
             <Link to='/profile'>
-            <button className=" px-3 py-2 rounded-md  bg-slate-800 hover:bg-slate-900 hover:duration-300 transition-all flex justify-center gap-2 items-center ">
+            <button className=" px-3 py-2 rounded-md  bg-[#2E2E2E]  hover:bg-[#1E1E1E] hover:duration-300 transition-all flex justify-center gap-2 items-center ">
              <ProfileIcon/> Profile</button></Link>
           </li>
         </ul>
@@ -40,12 +40,12 @@ const Header = () => {
         </li>
         <li className="px-6">
             <Link to='/'>
-            <button className=" px-3 py-2 rounded-md  bg-slate-800 hover:bg-slate-900 hover:duration-300 transition-all flex justify-center gap-2 items-center ">
+            <button className=" px-3 py-2 rounded-md  bg-[#2E2E2E] hover:bg-[#1E1E1E] hover:duration-300 transition-all flex justify-center gap-2 items-center ">
               <HomeIcon/> Home</button></Link>
           </li>
         <li className="px-6">
             <Link to='/login'>
-            <button className=" px-3 py-2 rounded-md  bg-slate-800 hover:bg-slate-900 hover:duration-300 transition-all flex justify-center gap-2 items-center ">
+            <button className=" px-3 py-2 rounded-md  bg-[#2E2E2E] hover:bg-[#1E1E1E] hover:duration-300 transition-all flex justify-center gap-2 items-center ">
               <LoginIcon/> try it now</button></Link>
           </li>
         </ul>

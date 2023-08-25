@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { BACKEND_API } from '../config'
 const ResetPassword = () => {
   const [password, setPassword]=useState({})
   const navigate=useNavigate()
@@ -17,7 +18,7 @@ const ResetPassword = () => {
   {
     e.preventDefault()
     try {
-      const res=await axios.post(`https://snippetswap-api.onrender.com/auth/reset-password/${resetToken}`,password)
+      const res=await axios.post(`${BACKEND_API}/auth/reset-password/${resetToken}`,password)
       setIsValid(true)
       navigate('/login')
     } catch (error) {
@@ -35,19 +36,19 @@ const ResetPassword = () => {
   return (
     <div className='h-screen'>
     <div className="flex justify-center mt-10">
-      <div className="bg-slate-800 drop-shadow-2xl rounded-md p-10 flex">
+      <div className="bg-[#2E2E2E] drop-shadow-2xl rounded-md p-10 flex">
         <form onSubmit={handleSubmit}>
           <p className='text-xl'>Reset your password</p>
           <div className='mt-3'>
               <label htmlFor="password" className="block text-sm">
                 New Password
               </label>
-              <input type="password" placeholder="• • • • • • • • " name="password" id="password" className='bg-gray-500 px-2 w-72 mt-2 py-1 rounded-lg' onChange={handleChange} required/>
+              <input type="password" placeholder="• • • • • • • • " name="password" id="password" className='bg-[#1d1b1b] px-2 w-72 mt-2 py-1 rounded-lg' onChange={handleChange} required/>
             </div>
             {isValid===true && <span className='text-xs text-green-500'>Password updated successfully.</span>}
             {isValid===false && <span className='text-xs text-red-500'>Link is expired please reset password again.</span>}
           <div className="mt-4 flex flex-col items-center justify-center">
-            <button className="bg-sky-700 px-20 py-1 rounded-lg">Change Password</button>
+            <button className="bg-sky-700 hover:bg-blue-600 px-20 py-1 rounded-lg">Change Password</button>
           </div>
          
         </form>
