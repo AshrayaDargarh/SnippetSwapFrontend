@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_API } from "../config";
+import { useAuth } from "../context/AuthContext";
 const Create = () => {
   const [snippet, setSnippet] = useState({});
   const navigate = useNavigate();
+  const {logout}=useAuth()
 
   async function getUser(token)
   {
@@ -58,6 +60,7 @@ const Create = () => {
       }
     } catch (err) {
       console.log(err.response);
+      logout()
       navigate('/unauthorized')
 
     }

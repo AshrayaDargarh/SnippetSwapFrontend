@@ -31,6 +31,7 @@ const Profile = () => {
       // console.log('user=',user)
       setLogo(res.data.firstName[0]);
     } catch (error) {
+      logout()
       navigate('/unauthorized')
       console.log(error.response);
     }
@@ -64,7 +65,7 @@ const Profile = () => {
       [e.target.name]:e.target.value
     })
   }
-  return user.firstName===''?<div className="h-screen flex justify-center"><TailSpin
+  return user.email===''?<div className="h-screen flex justify-center"><TailSpin
   height="80"
   width="80"
   color="#64B5F6"
