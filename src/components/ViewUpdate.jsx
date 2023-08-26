@@ -162,19 +162,7 @@ const ViewUpdate = () => {
           </div>
            
         </div>
-          // <div className="h-screen flex justify-center">
-          //   <div className=" h-48 w-60 text-center shadow-2xl shadow-gray-800 border border-slate-500 rounded-md">
-           
-          //     <p className="mt-8">
-          //   Snippet is Expired
-          //     </p>
-          //     <button 
-          //     className="bg-slate-800 shadow-md shadow-slate-700 p-2 w-40 rounded-md mt-3"
-          //     onClick={openModal}
-          //         type="button"
-          //     >Change Expiry</button>
-          //   </div>
-          // </div>
+         
         ):
         (
           <>

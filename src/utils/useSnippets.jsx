@@ -17,6 +17,7 @@ const useSnippets = () => {
         try {
         const token=localStorage.getItem('token')
         const res=await axios.get(`${BACKEND_API}/view`,{headers:{'Authorization':`Bearer ${token}`}})
+        console.log('data is',res.data[0])
             setSnippets(res.data)
             // console.log('user=',res.data[0].user)
         } 
