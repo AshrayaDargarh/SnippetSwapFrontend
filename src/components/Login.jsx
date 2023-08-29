@@ -47,7 +47,7 @@ const Login = () => {
           setVerify(false)
           setTimeout(()=>{
             setVerify(true)
-          },5000)
+          },10000)
         }
        
       })    
