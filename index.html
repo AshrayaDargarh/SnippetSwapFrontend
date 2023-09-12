@@ -7,11 +7,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SnippetSwap</title>
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Modern PWA Snippet React Application" />
+    <link rel="apple-touch-icon" href="/images/pwa-logo.png"/>
+    <link rel="manifest" href="/manifest.json" />
+    <title>SnippetSwap</title> 
   </head>
   <body class="bg-[#1E1E1E]">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if('serviceWorker' in navigator)
+      {
+        window.addEventListener('load',()=>{
+          navigator.serviceWorker.register('./serviceworker.js')
+          .then((reg)=>console.log('Success: ',reg.scope))
+          .catch((err)=>console.log('Error :',err))
+        })
+      }
+    </script>
   </body>
 </html>
  

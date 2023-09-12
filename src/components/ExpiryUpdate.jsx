@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { BACKEND_API } from "../config";
-
+import { useNavigate } from "react-router-dom";
 const initialValue = {
   daysToExpire: 1,
 };
 const FormModal = ({ isOpen, onClose, id, setTime }) => {
   const [expiry, setExpiry] = useState(initialValue);
-
+  const navigate=useNavigate()
   function daysDifference(res) {
     const expiryDate = new Date(res.updatedAt);
     const daysToExpire = res.daysToExpire;
@@ -42,7 +42,7 @@ const FormModal = ({ isOpen, onClose, id, setTime }) => {
     });
     console.log(expiry);
   }
-
+ 
   return (
     <div
       className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ${
